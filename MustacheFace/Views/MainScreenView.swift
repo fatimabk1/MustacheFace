@@ -6,29 +6,73 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MainScreenView: View {
-    @State var recorder = Recorder()
+    @StateObject var vm = CameraViewModel()
     
     var body: some View {
-        VStack {
-            CameraPreview(session: recorder.session)
-            HStack {
-                Button("Start") {
-                    recorder.startRecording()
+        ZStack {
+            Color.black.ignoresSafeArea()
+            CameraPreview(session: $vm.session, sessionQueue: vm.sessionQueue)
+                .ignoresSafeArea()
+            Group {
+                if vm.isRecording {
+                    stopButton(vm: vm)
+                } else {
+                    startButton(vm: vm)
                 }
-                Text(" | ")
-                Button("Stop") {
-                    recorder.stopRecording()
+            }
+            .padding()
+            .frame(maxHeight: .infinity, alignment: .bottom)
+        }
+        .onAppear {
+            vm.checkPermissions { granted in
+                if granted {
+                    vm.setup()
+                } else {
+                    vm.alert.title = "Failure with Permission"
+                    vm.alert.isPresented = true
                 }
             }
         }
-        .padding()
+        .alert(vm.alert.title, isPresented: $vm.alert.isPresented) {
+            Button("OK", role: .cancel) {}
+        }
     }
 }
 
+struct startButton: View {
+    @ObservedObject var vm: CameraViewModel
+    var body: some View {
+        Button {
+            vm.startRecording()
+        } label: {
+            Image(systemName: "record.circle")
+                .scaleEffect(3)
+                .foregroundStyle(.white)
+                .padding()
+        }
+    }
+}
+struct stopButton: View {
+    @ObservedObject var vm: CameraViewModel
+    var body: some View {
+        Button {
+            vm.stopRecording()
+        } label: {
+            Image(systemName: "stop.circle")
+                .scaleEffect(3)
+                .foregroundStyle(.red)
+                .padding()
+        }
+    }
+}
+
+
 #Preview {
-    MainScreenView()
+    var sessionQueue = DispatchQueue(label: "sessionQueue", qos: .userInitiated)
+    return MainScreenView()
 }
 
 /*

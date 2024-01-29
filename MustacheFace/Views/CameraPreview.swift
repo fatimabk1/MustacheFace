@@ -11,7 +11,8 @@ import AVFoundation
 
 
 struct CameraPreview: UIViewRepresentable {
-    let session: AVCaptureSession
+    @Binding var session: AVCaptureSession
+    var sessionQueue: DispatchQueue
     
     class VideoPreviewView: UIView {
         override class var layerClass: AnyClass {
@@ -22,24 +23,17 @@ struct CameraPreview: UIViewRepresentable {
             return layer as! AVCaptureVideoPreviewLayer
         }
     }
-    
-//    func makeUIView(context: Context) -> VideoPreviewView {
-//        let view = VideoPreviewView()
-//        view.videoPreviewLayer.session = self.captureSession
-//        return view
-//    }
-//    
-//    func updateUIView(_ uiView: VideoPreviewView, context: Context) {
-//        
-//    }
-    
+          
     func makeUIView(context: Context) -> UIView {
         let view = UIView()
-        let previewLayer = AVCaptureVideoPreviewLayer()
-        previewLayer.session = self.session
-//        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        
+        sessionQueue.async {
+            session.startRunning()
+        }
+        
         return view
     }
     
@@ -50,8 +44,10 @@ struct CameraPreview: UIViewRepresentable {
         }
     }
 }
+    
 
 #Preview {
     @State var session = AVCaptureSession()
-    return CameraPreview(session: session)
+    let sessionQueue = DispatchQueue(label: "sessionQueue", qos: .userInitiated)
+    return CameraPreview(session: $session, sessionQueue: sessionQueue)
 }

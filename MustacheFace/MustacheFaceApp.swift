@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MustacheFaceApp: App {
+//    var sessionQueue = DispatchQueue(label: "sessionQueue", qos: .userInitiated)
+    
     var body: some Scene {
         WindowGroup {
-            MainScreenView()
+            MainScreenView(/*sessionQueue: sessionQueue*/)
         }
     }
 }

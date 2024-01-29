@@ -13,10 +13,11 @@
 		085490C02B439C25000B22DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085490BF2B439C25000B22DC /* Preview Assets.xcassets */; };
 		085490C72B43A056000B22DC /* VideoCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490C62B43A056000B22DC /* VideoCaptureView.swift */; };
 		085490C92B43A076000B22DC /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490C82B43A076000B22DC /* CameraPreview.swift */; };
-		085490CB2B43A08F000B22DC /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490CA2B43A08F000B22DC /* Recorder.swift */; };
+		085490CB2B43A08F000B22DC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490CA2B43A08F000B22DC /* Camera.swift */; };
 		085490CD2B43A0F2000B22DC /* SavedVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490CC2B43A0F2000B22DC /* SavedVideosView.swift */; };
 		085490D22B43A241000B22DC /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490D12B43A241000B22DC /* Video.swift */; };
-		085490D42B43A25E000B22DC /* VideoCaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490D32B43A25E000B22DC /* VideoCaptureViewModel.swift */; };
+		085490D42B43A25E000B22DC /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085490D32B43A25E000B22DC /* CameraViewModel.swift */; };
+		0890E06B2B53319100F7B821 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890E06A2B53319100F7B821 /* AlertItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,10 +28,11 @@
 		085490BF2B439C25000B22DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		085490C62B43A056000B22DC /* VideoCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptureView.swift; sourceTree = "<group>"; };
 		085490C82B43A076000B22DC /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
-		085490CA2B43A08F000B22DC /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		085490CA2B43A08F000B22DC /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		085490CC2B43A0F2000B22DC /* SavedVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVideosView.swift; sourceTree = "<group>"; };
 		085490D12B43A241000B22DC /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		085490D32B43A25E000B22DC /* VideoCaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCaptureViewModel.swift; sourceTree = "<group>"; };
+		085490D32B43A25E000B22DC /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		0890E06A2B53319100F7B821 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		08B512FD2B45AA03004A133E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +88,7 @@
 		085490CE2B43A1C4000B22DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				085490CA2B43A08F000B22DC /* Recorder.swift */,
+				085490CA2B43A08F000B22DC /* Camera.swift */,
 				085490D12B43A241000B22DC /* Video.swift */,
 			);
 			path = Models;
@@ -95,7 +97,7 @@
 		085490CF2B43A1D5000B22DC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				085490D32B43A25E000B22DC /* VideoCaptureViewModel.swift */,
+				085490D32B43A25E000B22DC /* CameraViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -103,12 +105,21 @@
 		085490D02B43A1DF000B22DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0890E0692B53317F00F7B821 /* Helpers */,
 				085490BA2B439C24000B22DC /* MainScreenView.swift */,
 				085490C62B43A056000B22DC /* VideoCaptureView.swift */,
 				085490C82B43A076000B22DC /* CameraPreview.swift */,
 				085490CC2B43A0F2000B22DC /* SavedVideosView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0890E0692B53317F00F7B821 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0890E06A2B53319100F7B821 /* AlertItem.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,13 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				085490CB2B43A08F000B22DC /* Recorder.swift in Sources */,
+				085490CB2B43A08F000B22DC /* Camera.swift in Sources */,
 				085490C72B43A056000B22DC /* VideoCaptureView.swift in Sources */,
 				085490CD2B43A0F2000B22DC /* SavedVideosView.swift in Sources */,
 				085490C92B43A076000B22DC /* CameraPreview.swift in Sources */,
 				085490BB2B439C24000B22DC /* MainScreenView.swift in Sources */,
-				085490D42B43A25E000B22DC /* VideoCaptureViewModel.swift in Sources */,
+				085490D42B43A25E000B22DC /* CameraViewModel.swift in Sources */,
 				085490D22B43A241000B22DC /* Video.swift in Sources */,
+				0890E06B2B53319100F7B821 /* AlertItem.swift in Sources */,
 				085490B92B439C24000B22DC /* MustacheFaceApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
